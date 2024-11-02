@@ -19,11 +19,11 @@ modification de la taille de la grille et modification du nombre de cartes dans 
 
 ## Comment lancer le jeu
 
-+ Vous devez compiler le fichier mahjong/src/main.py
++ Vous devez compiler le fichier `mahjong/src/main.py`.
 
 + Vous pouvez le compiler avec un IDE (VSCodium, PyCharm, etc..).
 
-+ Vous pouvez également le compiler dans un terminal (mettez vous dans mahjong/src/) avec la commande : python3 main.py
++ Vous pouvez également le compiler dans un terminal (mettez vous dans le dossier `mahjong/src/`) avec la commande : `python3 main.py`.
 
 ## Contribuer
 
