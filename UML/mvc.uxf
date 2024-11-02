@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>200</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Grid</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>130</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>GameSettings</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>410</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ControllerGame</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>70</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ViewMainMenu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>200</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ViewGame</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>150</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ViewColorMenu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>110</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ViewGridMenu</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>190</y>
+      <w>400</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1= 1
+m2= 1
+prévient &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>70</y>
+      <w>510</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+prévient &gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;20.0;480.0;20.0;480.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>30</y>
+      <w>760</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+prévient &gt;</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;20.0;610.0;20.0;610.0;50.0;740.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>50</y>
+      <w>660</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+prévient &gt;</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;20.0;550.0;20.0;550.0;70.0;640.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>220</y>
+      <w>310</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; événements</panel_attributes>
+    <additional_attributes>280.0;10.0;280.0;30.0;10.0;30.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>170</y>
+      <w>380</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; événements</panel_attributes>
+    <additional_attributes>350.0;10.0;350.0;120.0;10.0;120.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>130</y>
+      <w>440</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; événements</panel_attributes>
+    <additional_attributes>410.0;10.0;410.0;210.0;10.0;210.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>90</y>
+      <w>470</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; événements</panel_attributes>
+    <additional_attributes>440.0;10.0;440.0;320.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>220</y>
+      <w>320</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; met à jour</panel_attributes>
+    <additional_attributes>290.0;220.0;290.0;240.0;20.0;240.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>150</y>
+      <w>400</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; met à jour</panel_attributes>
+    <additional_attributes>370.0;290.0;370.0;350.0;10.0;350.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>220</y>
+      <w>310</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+synchronise les modifs. &gt;</panel_attributes>
+    <additional_attributes>280.0;10.0;280.0;50.0;10.0;50.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>170</y>
+      <w>380</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+synchronise les modifs. &gt;</panel_attributes>
+    <additional_attributes>350.0;10.0;350.0;140.0;10.0;140.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>130</y>
+      <w>440</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+synchronise les modifs. &gt;</panel_attributes>
+    <additional_attributes>410.0;10.0;410.0;230.0;10.0;230.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>70</y>
+      <w>560</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+synchronise les modifs &gt;</panel_attributes>
+    <additional_attributes>490.0;10.0;520.0;10.0;520.0;360.0;10.0;360.0</additional_attributes>
+  </element>
+</diagram>
