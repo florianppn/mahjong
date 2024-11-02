@@ -23,7 +23,7 @@ changing the size of the grid and changing the number of cards in the grid.
 
 + You can compile it with an IDE (VSCodium, PyCharm, etc.).
 
-+ You can also compile it in a terminal (go to mahjong/src/) and use this command : > python3 main.py
++ You can also compile it in a terminal (go to mahjong/src/) and use this command : `python3 main.py`
 
 ## Contribute
 
