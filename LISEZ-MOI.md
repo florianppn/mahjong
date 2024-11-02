@@ -39,7 +39,7 @@ Ce projet est sous licence [MIT].
 
 ## Captures d'écran
 
-![Screenshot game](./screens/game.png)
+![Screenshot game](./screenshots/game.png)
 
 + (1): Boutons pour recommencer une partie.
 
@@ -57,11 +57,11 @@ Ce projet est sous licence [MIT].
 
 + (8): bouton pour quitter le jeu et bouton pour aller dans le menu principal.
 
-![Screenshot menu](./screens/menu.png)
+![Screenshot menu](./screenshots/menu.png)
 
-![Screenshot color_menu](./screens/color_menu.png)
+![Screenshot color_menu](./screenshots/color_menu.png)
 
-![Screenshot grid_menu](./screens/grid_menu.png)
+![Screenshot grid_menu](./screenshots/grid_menu.png)
 
 ## Post-scriptum
 
