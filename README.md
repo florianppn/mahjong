@@ -19,11 +19,11 @@ changing the size of the grid and changing the number of cards in the grid.
 
 ## How to start the game
 
-+ You must compile the `mahjong/src/main.py` file
++ You must compile the `mahjong/src/main.py` file.
 
 + You can compile it with an IDE (VSCodium, PyCharm, etc.).
 
-+ You can also compile it in a terminal (go to `mahjong/src/`) and use this command : `python3 main.py`
++ You can also compile it in a terminal (go to `mahjong/src/` folder) and use this command : `python3 main.py`.
 
 ## Contribute
 
