@@ -1,61 +1,61 @@
-# Mahjong in Python with Tkinter
+# Mahjong en Python avec Tkinter
 
 ## Description
 
-Mahjong game implemented in Python using the Tkinter library for an intuitive user interface.
+Jeu du Mahjong implémenté en Python à l'aide de la bibliothèque Tkinter pour une interface utilisateur intuitive.
 
-## Main features
+## Fonctionnalités principales
 
-+ Rules of the game: the goal is to eliminate all the cards from the grid by matching them into identical pairs.
++ Règles du jeu: le but est d'éliminer toutes les cartes de la grille en les associant par paires identiques.
 
-+ Game modes: classic mode.
++ Modes de jeu : mode classique.
 
-+ Customization via the interface: modification of the game background, modification of the shape of the grid, 
-changing the size of the grid and changing the number of cards in the grid.
++ Personnalisation via l'interface : modification de l'arrière plan du jeu, modification de la forme de la grille, 
+modification de la taille de la grille et modification du nombre de cartes dans la grille.
 
-+ It is important to know that when you are going to play on a grid with a shape different from the classic grid you will not be able to modify the size/number of cards on it.
++ Il est important de savoir que lorsque que vous allez jouer sur une grille d'une forme différence que la grille classique vous ne pourrez pas modifier la taille/nombre de cartes de celle-ci.
 
-+ Save and resume: ability to save current games and resume them later.
++ Sauvegarde et reprise : possibilité de sauvegarder les parties en cours et de les reprendre ultérieurement.
 
-## How to start the game
+## Comment lancer le jeu
 
-+ You must compile the `mahjong/src/main.py` file.
++ Vous devez compiler le fichier `mahjong/src/main.py`.
 
-+ You can compile it with an IDE (VSCodium, PyCharm, etc.).
++ Vous pouvez le compiler avec un IDE (VSCodium, PyCharm, etc..).
 
-+ You can also compile it in a terminal (go to `mahjong/src/` folder) and use this command : `python3 main.py`.
++ Vous pouvez également le compiler dans un terminal (mettez vous dans le dossier `mahjong/src/`) avec la commande : `python3 main.py`.
 
-## Contribute
+## Contribuer
 
-+ Don't hesitate to report bugs.
++ N'hésitez pas à signaler des bugs.
 
-+ Don't hesitate to suggest new features.
++ N'hésitez pas à proposer de nouvelles fonctionnalités.
 
-+ Don't hesitate to improve existing code.
++ N'hésitez pas à améliorer le code existant.
 
-## License
+## Licence
 
-This project is licensed under [MIT].
+Ce projet est sous licence [MIT].
 
-## Screenshots
+## Captures d'écran
 
 ![Screenshot game](./screenshots/game.png)
 
-+ (1): Buttons to restart a game.
++ (1): Boutons pour recommencer une partie.
 
-+ (2): information when the game is over.
++ (2) : informations lorsque que la partie est terminée.
 
-+ (3): information on the number of cards remaining in the grid (in real time).
++ (3): informations sur le nombre de cartes restantes dans la grille (en temps réelle).
 
-+ (4): show a playable card, that is to say a card which has at least one card identical to it on the grid.
++ (4): montrer une carte jouable, c'est-à-dire une carte qui a au moins une carte identique à elle sur la grille.
 
-+ (5): show a pair of playable cards, that is to say a pair of cards that are identical.
++ (5): montrer un couple de cartes jouables, c'est-à-dire un couple de cartes qui sont identiques.
 
-+ (6): erases the previously made movement (backtrack).
++ (6): efface le mouvement précèdement fait (retour en arrière).
 
-+ (7): save the grid.
++ (7): sauvegarder la grille.
 
-+ (8): button to exit the game and button to go to the main menu.
++ (8): bouton pour quitter le jeu et bouton pour aller dans le menu principal.
 
 ![Screenshot menu](./screenshots/menu.png)
 
@@ -65,9 +65,8 @@ This project is licensed under [MIT].
 
 ## Post-scriptum
 
-This project constitutes a rework of an old Mahjong game developed in first yeard computer science (this one is available in deprecated.zip).
-The initial goal is to migrate to an MVC architecture and using OOP principles. 
-A graphical overhaul with integration of demo mode as well as optimization of algorithms are planned in the longer term.
+Ce projet constitue une refonte d'un ancien jeu de Mahjong développé en L1 informatique (celui-ci est disponible dans deprecated.zip).
+L'objectif initial est de migrer vers une architecture MVC et d'appliquer les principes de la POO. 
+Une refonte graphique avec intégration du mode démo ainsi qu'une optimisation des algorithmes sont prévues à plus long terme.
 
-The code comments are in French.
-
+Les commentaires du code sont en français, profitez en pour le lire !
