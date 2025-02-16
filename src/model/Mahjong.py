@@ -108,10 +108,11 @@ class Mahjong(ObservableModel):
 
     def remove(self) -> None:
         """Supprimer un couple de cartes de la grille."""
-        self.__move_history.append((self.__grid[self.__click1[0]][self.__click1[1]][0], (self.__click1), (self.__click2)))
-        self.__grid[self.__click1[0]][self.__click1[1]].pop(0)
-        self.__grid[self.__click2[0]][self.__click2[1]].pop(0)
-        self._fire_change()
+        if self.__grid[self.__click1[0]][self.__click1[1]][0] == self.__grid[self.__click2[0]][self.__click2[1]][0]:
+            self.__move_history.append((self.__grid[self.__click1[0]][self.__click1[1]][0], (self.__click1), (self.__click2)))
+            self.__grid[self.__click1[0]][self.__click1[1]].pop(0)
+            self.__grid[self.__click2[0]][self.__click2[1]].pop(0)
+            self._fire_change()
 
     def add(self) -> None:
         """Ajout d'un couple de cartes dans la grille.
@@ -132,11 +133,7 @@ class Mahjong(ObservableModel):
             - True si la grille est vide.
             - False si la grille est remplie.
         """
-        for row in range(self.__rows):
-            for column in range(self.__columns):
-                if len(self.__grid[row][column]) != 0:
-                    return False
-        return True
+        return False if len(self.__grid) == 0 else True
 
     def cards_position(self) -> list:
         """Obtenir une liste de toutes les cartes du jeu avec leur position.
@@ -185,6 +182,7 @@ class Mahjong(ObservableModel):
         Returns:
             Une liste contenant deux tuples. Les tuples contiennent les coordonnées et le numéro des cartes identiques.
         """
+        self._fire_change()
         return choice(self.playable_card_couple())
 
     def save_grid(self) -> None:

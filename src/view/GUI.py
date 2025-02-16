@@ -25,17 +25,16 @@ class GUI(Tk):
     def show_game(self):
         mouse_controller = MouseController(self.__mahjong)
         self.bind('<Button-1>', mouse_controller.mouse_clicked)
-        left_frame = Frame(self, width=200, height=800)
-        left_frame.pack(side=LEFT)
-        StatisticView(left_frame, self.__mahjong).pack(side=TOP)
 
         grid_view = GridView(self, self.__mahjong)
         grid_view.pack(side=LEFT)
 
-        right_frame = Frame(self, width=200, height=800)
-        right_frame.pack(side=RIGHT)
-        HelpButtonController(self, self.__mahjong, grid_view).pack(side=TOP)
-        ActionButtonController(self, self.__mahjong).pack(side=TOP)
+        frame = Frame(self, width=200, height=800)
+        frame.pack(side=LEFT)
+
+        StatisticView(frame, self.__mahjong).pack(side=TOP)
+        HelpButtonController(frame, self.__mahjong, grid_view).pack(side=TOP)
+        ActionButtonController(frame, self.__mahjong).pack(side=TOP)
 
     def show_end(self):
         pass
