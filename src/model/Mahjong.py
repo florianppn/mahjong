@@ -11,13 +11,11 @@ from random import choice
 ###########################################
 #                modules                  #
 ###########################################
-from model.utils.JsonLoader import JsonLoader
-from model.utils.RandomGrid import RandomGrid
-from model.ObservableModel import ObservableModel
-from view.ViewGame import ViewGame
+from model.shape.ShapeStrategy import ShapeStrategy
+from utils.ObservableModel import ObservableModel
 ###########################################
 
-class Grid(ObservableModel):
+class Mahjong(ObservableModel):
     """Représente un modèle contenant une grille généré aléatoirement avec RandomGrid.
 
     Attributs:
@@ -30,72 +28,90 @@ class Grid(ObservableModel):
         move_history: Historique des coups joué par le joueur => (carte, (coordonnée de la première carte), (coordonnée de la deuxième carte)).
     """
 
-    def __init__(self):
+    def __init__(self, rows:int, columns:int, cards:int, shape:ShapeStrategy):
         super().__init__()
-
-        self.__rows:int = None
-        self.__columns:int = None
-        self.__cards:int = None
-        self.__shape:str = None
-        self.__grid:[[[int]]] = None
-        self.__grid_copy:[[[int]]] = None
-        self.__move_history:[tuple] = []
-
-    def get_grid(self) -> [[[int]]]:
-        return self.__grid
-
-    def get_grid_copy(self) -> [[[int]]]:
-        return self.__grid_copy
+        self.__rows, self.__columns = rows, columns
+        self.__cards = cards
+        self.__shape = shape
+        self.__grid = shape.generate_grid(rows, columns, cards)
+        self.__grid_copy = self.__grid
+        self.__move_history = []
+        self.__cx, self.__cy = 64, 84
+        self.__x0, self.__y0 = 55, 40
+        self.__click1, self.__click2 = (), ()
 
     def get_rows(self) -> int:
         return self.__rows
-    
+
     def get_columns(self) -> int:
         return self.__columns
 
     def get_cards(self) -> int:
         return self.__cards
 
-    def get_shape(self) -> str:
-        return self.__shape
+    def get_grid(self) -> [[[int]]]:
+        return self.__grid
 
     def get_move_history(self) -> [tuple]:
         return self.__move_history
 
+    def get_click1(self) -> tuple:
+        return self.__click1
+
+    def get_click2(self) -> tuple:
+        return self.__click2
+
+    def get_cx(self) -> int:
+        return self.__cx
+
+    def get_cy(self) -> int:
+        return self.__cy
+
+    def get_x0(self) -> int:
+        return self.__x0
+
+    def get_y0(self) -> None:
+        return self.__y0
+
+    def set_rows(self, rows:int) -> None:
+        self.__rows = rows
+
+    def set_columns(self, columns:int) -> None:
+        self.__columns = columns
+    
+    def set_cards(self, cards:int) -> None:
+        self.__cards = cards
+
+    def set_shape(self, shape:ShapeStrategy) -> None:
+        self.__shape = shape
+
+    def set_click1(self, t:tuple) -> None:
+        self.__click1 = t
+        self._fire_change()
+
+    def set_click2(self, t:tuple) -> None:
+        self.__click2 = t
+        self._fire_change()
+
     def replay(self) -> None:
-        """Jouer une nouvelle partie.
-        Notes:
-            - Génère une nouvelle grille aléatoirement.
-            - Remet à zéro l'historique des coups du joueur.
-            - Préviens les observeurs/écouteurs.
-        """
-        self.__grid = RandomGrid().generate_random_grid(self.__rows, self.__columns, self.__cards, self.__shape)
+        """Jouer une nouvelle partie."""
+        self.__grid = self.__shape.generate_grid(self.__rows, self.__columns, self.__cards, self.__shape)
         self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
-        self._notify_grid_change()
+        self._fire_change()
 
     def retry(self) -> None:
-        """Rejouer la partie.
-        Notes:
-            - Génère la même grille en utilisant la copie de celle-ci.
-            - Remet à zéro l'historique des coups du joueur.
-            - Préviens les observeurs/écouteurs.
-        """
+        """Rejouer la partie."""
         self.__grid = deepcopy(self.__grid_copy)
         self.__move_history = []
-        self._notify_grid_change()
+        self._fire_change()
 
-    def remove(self, click1, click2) -> None:
-        """Supprimer un couple de cartes de la grille.
-        Notes:
-            - Ajout du couple dans l'historique des coups du joueur.
-            - Suppression des deux cartes dans la grille.
-            - Préviens les observeurs/écouteurs.
-        """
-        self.__move_history.append((self.__grid[click1[0]][click1[1]][0], (click1), (click2)))
-        self.__grid[click1[0]][click1[1]].pop(0)
-        self.__grid[click2[0]][click2[1]].pop(0)
-        self._notify_grid_change()
+    def remove(self) -> None:
+        """Supprimer un couple de cartes de la grille."""
+        self.__move_history.append((self.__grid[self.__click1[0]][self.__click1[1]][0], (self.__click1), (self.__click2)))
+        self.__grid[self.__click1[0]][self.__click1[1]].pop(0)
+        self.__grid[self.__click2[0]][self.__click2[1]].pop(0)
+        self._fire_change()
 
     def add(self) -> None:
         """Ajout d'un couple de cartes dans la grille.
@@ -108,7 +124,7 @@ class Grid(ObservableModel):
             move = self.__move_history.pop()
             self.__grid[move[1][0]][move[1][1]].insert(0, move[0])
             self.__grid[move[2][0]][move[2][1]].insert(0, move[0])
-            self._notify_grid_change()
+            self._fire_change()
     
     def is_empty(self) -> bool:
         """Vérifie si la grille est vide.
@@ -171,17 +187,6 @@ class Grid(ObservableModel):
         """
         return choice(self.playable_card_couple())
 
-    def end(self) -> str:
-        """Obtenir la phrase de fin du jeu si c'est la fin du jeu.
-        Returns:
-            La phrase de fin du jeu si c'est la fin du jeu sinon une chaine vide.
-        """
-        if self.is_empty():
-            return "Well done you won !"
-        elif self.is_blocked():
-            return "Situation blocked, it's lost !"
-        return ""
-
     def save_grid(self) -> None:
         """Sauvegarder la grille de jeu dans un fichier.
         Notes:
@@ -231,4 +236,3 @@ class Grid(ObservableModel):
             self.__shape = settings.get_setting("grid_settings", "shape")
             self.__grid = RandomGrid().generate_random_grid(self.__rows, self.__columns, self.__cards, self.__shape)
             self.__grid_copy = deepcopy(self.__grid)
-        self._notify_grid_change()

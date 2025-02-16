@@ -1,0 +1,1 @@
+from .Mahjong import Mahjong
