@@ -75,15 +75,19 @@ class Mahjong(ObservableModel):
 
     def set_rows(self, rows:int) -> None:
         self.__rows = rows
+        self._fire_change()
 
     def set_columns(self, columns:int) -> None:
         self.__columns = columns
+        self._fire_change()
     
     def set_cards(self, cards:int) -> None:
         self.__cards = cards
+        self._fire_change()
 
     def set_shape(self, shape:ShapeStrategy) -> None:
         self.__shape = shape
+        self.replay()
 
     def set_click1(self, t:tuple) -> None:
         self.__click1 = t
@@ -95,7 +99,7 @@ class Mahjong(ObservableModel):
 
     def replay(self) -> None:
         """Jouer une nouvelle partie."""
-        self.__grid = self.__shape.generate_grid(self.__rows, self.__columns, self.__cards, self.__shape)
+        self.__grid = self.__shape.generate_grid(self.__rows, self.__columns, self.__cards)
         self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
         self._fire_change()

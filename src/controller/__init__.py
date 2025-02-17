@@ -1,3 +1,4 @@
 from .HelpButtonController import HelpButtonController
 from .SaveMenuController import SaveMenuController
+from .OptionsMenuController import OptionsMenuController
 from .MouseController import MouseController

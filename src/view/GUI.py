@@ -30,6 +30,7 @@ class GUI(Tk):
         menu = Frame(self)
         menu.grid(row=0, column=0)
         SaveMenuController(menu, self.__mahjong).grid(row=0, column=0)
+        OptionsMenuController(menu, self.__mahjong).grid(row=0, column=1)
 
         grid_view = GridView(self, self.__mahjong)
         grid_view.grid(row=1, column=0, columnspan=10)
