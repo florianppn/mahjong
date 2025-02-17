@@ -21,9 +21,15 @@ class HelpButtonController(Frame):
         self.__mahjong = mahjong
         self.__grid_view = grid_view
 
-        Button(self, text="Montrer une carte", command=lambda:self.show_card()).pack(side=TOP)
-        Button(self, text="Montrer une paire", command=lambda:self.show_card_couple()).pack(side=TOP)
-        Button(self, text="Retour arrière", command=lambda:self.back()).pack(side=TOP)
+        card_button = Button(self, text="Une carte", command=lambda:self.show_card())
+        card_button.config(borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
+        card_button.grid(row=0, column=0, pady=10, padx=10)
+        couple_button = Button(self, text="Une paire", command=lambda:self.show_card_couple())
+        couple_button.config(borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
+        couple_button.grid(row=0, column=1, pady=10, padx=10)
+        back_button = Button(self, text="Retour arrière", command=lambda:self.back())
+        back_button.config(borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
+        back_button.grid(row=1, column=0, columnspan=2, pady=10)
 
     def show_card(self) -> None:
         move = self.__mahjong.one_move()
