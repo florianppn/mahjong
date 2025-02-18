@@ -2,7 +2,7 @@
 
 ## Description
 
-Jeu du Mahjong implémenté en Python à l'aide de la bibliothèque Tkinter. Pour ce projet j'ai utilisé l'architecure MVC ainsi que le pattern observer.
+Jeu du Mahjong implémenté en Python à l'aide de la bibliothèque Tkinter. Pour ce projet j'ai utilisé l'architecture MVC ainsi que le pattern observer.
 J'ai également utilisé le pattern strategy pour les différents types de grilles (losange, rectangle, donut, etc...).
 
 ## Règles du jeu
