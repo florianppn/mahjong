@@ -36,7 +36,7 @@ class GUI(Tk):
         SaveMenuController(menu, self.__mahjong).grid(row=0, column=0)
         OptionsMenuController(self, menu, self.__mahjong).grid(row=0, column=1)
         HelpMenuController(menu, self.__mahjong, self.__grid_view).grid(row=0, column=2)
-        StatisticView(menu, self.__mahjong).grid(row=0, column=3, padx=30)
+        StatisticView(menu, self.__mahjong).grid(row=0, column=3, padx=60)
 
     def show(self, state:int):
         """
