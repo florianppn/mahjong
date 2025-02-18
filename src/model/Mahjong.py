@@ -27,7 +27,6 @@ class Mahjong(ObservableModel):
         grid_copy: copie de la grille généré aléatoirement.
         move_history: Historique des coups joué par le joueur => (carte, (coordonnée de la première carte), (coordonnée de la deuxième carte)).
     """
-
     def __init__(self, rows:int, columns:int, cards:int, shape:ShapeStrategy):
         super().__init__()
         self.__rows, self.__columns = rows, columns
@@ -39,6 +38,7 @@ class Mahjong(ObservableModel):
         self.__cx, self.__cy = 64, 84
         self.__x0, self.__y0 = 55, 40
         self.__click1, self.__click2 = (), ()
+        self.__remaining_cards = cards*4
 
     def get_rows(self) -> int:
         return self.__rows
@@ -70,8 +70,11 @@ class Mahjong(ObservableModel):
     def get_x0(self) -> int:
         return self.__x0
 
-    def get_y0(self) -> None:
+    def get_y0(self) -> int:
         return self.__y0
+
+    def get_remaining_cards(self) -> int:
+        return self.__remaining_cards
 
     def set_rows(self, rows:int) -> None:
         self.__rows = rows
@@ -116,6 +119,7 @@ class Mahjong(ObservableModel):
             self.__move_history.append((self.__grid[self.__click1[0]][self.__click1[1]][0], (self.__click1), (self.__click2)))
             self.__grid[self.__click1[0]][self.__click1[1]].pop(0)
             self.__grid[self.__click2[0]][self.__click2[1]].pop(0)
+            self.__remaining_cards = self.__remaining_cards-2
             self._fire_change()
 
     def add(self) -> None:
@@ -129,6 +133,7 @@ class Mahjong(ObservableModel):
             move = self.__move_history.pop()
             self.__grid[move[1][0]][move[1][1]].insert(0, move[0])
             self.__grid[move[2][0]][move[2][1]].insert(0, move[0])
+            self.__remaining_cards = self.__remaining_cards+2
             self._fire_change()
     
     def is_empty(self) -> bool:

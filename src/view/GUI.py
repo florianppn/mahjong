@@ -27,19 +27,16 @@ class GUI(Tk):
         mouse_controller = MouseController(self.__mahjong)
         self.bind('<Button-1>', mouse_controller.mouse_clicked)
 
-        menu = Frame(self)
-        menu.grid(row=0, column=0)
-        SaveMenuController(menu, self.__mahjong).grid(row=0, column=0)
-        OptionsMenuController(menu, self.__mahjong).grid(row=0, column=1)
-
         grid_view = GridView(self, self.__mahjong)
         grid_view.grid(row=1, column=0, columnspan=10)
 
-        frame = Frame(self, width=200, height=800)
-        frame.grid(row=1, column=11)
-
-        StatisticView(frame, self.__mahjong).grid(row=0, column=0, pady=100)
-        HelpButtonController(frame, self.__mahjong, grid_view).grid(row=1, column=0, pady=100)
+        menu = Frame(self)
+        menu.config(bg="#557788")
+        menu.grid(row=0, column=0)
+        SaveMenuController(menu, self.__mahjong).grid(row=0, column=0)
+        OptionsMenuController(menu, self.__mahjong).grid(row=0, column=1)
+        HelpMenuController(menu, self.__mahjong, grid_view).grid(row=0, column=2)
+        StatisticView(menu, self.__mahjong).grid(row=0, column=3, padx=30)
 
     def show_end(self):
         pass

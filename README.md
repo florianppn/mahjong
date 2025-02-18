@@ -34,6 +34,8 @@ Ce projet est sous licence [MIT].
 
 ## Captures d'écran
 
+![Mahjong](./screenshots/mahjong.png)
+
 ## Crédits des images
 
 

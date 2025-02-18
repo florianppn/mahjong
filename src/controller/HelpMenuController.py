@@ -10,26 +10,24 @@ from tkinter import *
 #                modules                  #
 ###########################################
 from model.Mahjong import Mahjong
+from model.shape import *
 from view.GridView import GridView
 ###########################################
 
-class HelpButtonController(Frame):
+class HelpMenuController(Menubutton):
 
     def __init__(self, tk:Tk, mahjong:Mahjong, grid_view:GridView):
-        super().__init__(tk)
+        super().__init__(tk, text="Aide", width=20, borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
         self.__tk = tk
         self.__mahjong = mahjong
         self.__grid_view = grid_view
 
-        card_button = Button(self, text="Une carte", command=lambda:self.show_card())
-        card_button.config(borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
-        card_button.grid(row=0, column=0, pady=10, padx=10)
-        couple_button = Button(self, text="Une paire", command=lambda:self.show_card_couple())
-        couple_button.config(borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
-        couple_button.grid(row=0, column=1, pady=10, padx=10)
-        back_button = Button(self, text="Retour arrière", command=lambda:self.back())
-        back_button.config(borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
-        back_button.grid(row=1, column=0, columnspan=2, pady=10)
+        menu_options = Menu(self, tearoff = 0)
+        menu_shape = Menu(menu_options, tearoff = 0)
+        self.configure(menu=menu_options)
+        menu_options.add_command(label="Montrer une carte", command=lambda:self.show_card())
+        menu_options.add_command(label="Montrer un couple", command=lambda:self.show_card_couple())
+        menu_options.add_command(label="Retour en arrière", command=lambda:self.back())
 
     def show_card(self) -> None:
         move = self.__mahjong.one_move()
