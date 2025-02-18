@@ -10,12 +10,15 @@ from tkinter import *
 #                modules                  #
 ###########################################
 from model.Mahjong import Mahjong
+from view import *
 ###########################################
 
 class MouseController:
 
-    def __init__(self, mahjong:Mahjong):
+    def __init__(self, gui, mahjong:Mahjong, grid_view:GridView):
+        self.__gui = gui
         self.__mahjong = mahjong
+        self.__grid_view = grid_view
 
     def mouse_clicked(self, event):
         """Vérifie si une case de l'interface graphique du Mahjong est cliquable.
@@ -40,8 +43,16 @@ class MouseController:
         elif click2 == ():
             self.__mahjong.set_click2((i, j))
             self.__mahjong.remove()
+            self.check_game_status()
             self.__mahjong.set_click1(()), self.__mahjong.set_click2(())
         elif click1 == click2:
             self.__mahjong.set_click1(()), self.__mahjong.set_click2(())
         else:
             self.__mahjong.set_click1(()), self.__mahjong.set_click2(())
+            
+
+    def check_game_status(self) -> None:
+        if (self.__mahjong.is_empty()):
+            self.__gui.show(1)
+        elif (self.__mahjong.is_blocked()):
+            self.__gui.show(2)

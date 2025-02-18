@@ -3,7 +3,6 @@
 ###########################################
 #                libraries                #
 ###########################################
-import pickle
 from copy import *
 from random import choice
 ###########################################
@@ -33,7 +32,7 @@ class Mahjong(ObservableModel):
         self.__cards = cards
         self.__shape = shape
         self.__grid = shape.generate_grid(rows, columns, cards)
-        self.__grid_copy = self.__grid
+        self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
         self.__cx, self.__cy = 64, 84
         self.__x0, self.__y0 = 55, 40
@@ -49,8 +48,14 @@ class Mahjong(ObservableModel):
     def get_cards(self) -> int:
         return self.__cards
 
+    def get_shape(self) -> ShapeStrategy:
+        return self.__shape
+
     def get_grid(self) -> [[[int]]]:
         return self.__grid
+
+    def get_grid_copy(self) -> [[[int]]]:
+        return self.__grid_copy
 
     def get_move_history(self) -> [tuple]:
         return self.__move_history
@@ -76,6 +81,14 @@ class Mahjong(ObservableModel):
     def get_remaining_cards(self) -> int:
         return self.__remaining_cards
 
+    def set_grid(self, grid:[[[int]]]) -> None:
+        self.__grid = grid
+        self._fire_change()
+
+    def set_grid_copy(self, grid_copy:[[[int]]]) -> None:
+        self.__grid_copy = grid_copy
+        self._fire_change()
+
     def set_rows(self, rows:int) -> None:
         self.__rows = rows
         self._fire_change()
@@ -90,7 +103,11 @@ class Mahjong(ObservableModel):
 
     def set_shape(self, shape:ShapeStrategy) -> None:
         self.__shape = shape
-        self.replay()
+        self._fire_change()
+
+    def set_move_history(self, moves:[tuple]) -> None:
+        self.__move_history = moves
+        self._fire_change()
 
     def set_click1(self, t:tuple) -> None:
         self.__click1 = t
@@ -105,12 +122,14 @@ class Mahjong(ObservableModel):
         self.__grid = self.__shape.generate_grid(self.__rows, self.__columns, self.__cards)
         self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
+        self.__remaining_cards = self.__cards*4
         self._fire_change()
 
     def retry(self) -> None:
         """Rejouer la partie."""
         self.__grid = deepcopy(self.__grid_copy)
         self.__move_history = []
+        self.__remaining_cards = self.__cards*4
         self._fire_change()
 
     def remove(self) -> None:
@@ -142,7 +161,7 @@ class Mahjong(ObservableModel):
             - True si la grille est vide.
             - False si la grille est remplie.
         """
-        return False if len(self.__grid) == 0 else True
+        return True if self.__remaining_cards == 0 else False
 
     def cards_position(self) -> list:
         """Obtenir une liste de toutes les cartes du jeu avec leur position.
@@ -174,8 +193,6 @@ class Mahjong(ObservableModel):
 
     def is_blocked(self) -> bool:
         """Vérifie si la grille est bloquée.
-        Notes:
-            - La grille est bloquée quand il n'y a plus de couples de cartes jouables.
         Returns:
             - True si la grille est bloquée.
             - False si la grille n'est pas bloquées.
@@ -191,55 +208,4 @@ class Mahjong(ObservableModel):
         Returns:
             Une liste contenant deux tuples. Les tuples contiennent les coordonnées et le numéro des cartes identiques.
         """
-        self._fire_change()
         return choice(self.playable_card_couple())
-
-    def save_grid(self) -> None:
-        """Sauvegarder la grille de jeu dans un fichier.
-        Notes:
-            - Utilisation de pickle.dump() pour sérialiser la sauvegarde.
-        Raises:
-            Exception : s'il se produit un quelconque problème lors de la sauvegarde de la grille.
-        """
-        try:
-            backup = {"grid": self.__grid,
-                        "copy_grid": self.__grid_copy,
-                        "rows": self.__rows, 
-                        "columns": self.__columns,
-                        "cards": self.__cards,
-                        "move_history": self.__move_history}
-            file = open("../data/save/save", "wb")
-            pickle.dump(backup, file)
-            file.close()
-        except Exception as e:
-            raise Exception(f"An unexpected error has occurred: {e}")
-
-    def load_grid(self, state:bool) -> None:
-        """Charger la grille de jeu.
-        Args:
-            state : Si Vrai alors utiliser la sauvegarde si Faux alors créer une grille aléatoirement.
-        Notes:
-            - Lors de la création de la grille aléatoire (state = Faux), les paramètres de la grille sont ceux du fichier settings.json
-            - Dans tous les cas la méthode préviens les observeurs/écouteurs.
-        """
-        if state:
-            try:
-                file = open("../data/save/save", "rb")
-                save = pickle.load(file)
-                file.close()
-                self.__grid = save["grid"]
-                self.__grid_copy = save["copy_grid"]
-                self.__rows = save["rows"]
-                self.__columns = save["columns"]
-                self.__cards = save["cards"]
-                self.__move_history = save["move_history"]
-            except:
-                raise Exception("Something went wrong when opening the file")
-        else:
-            settings = JsonLoader("./config/settings.json")
-            self.__rows = settings.get_setting("grid_settings", "rows")
-            self.__columns = settings.get_setting("grid_settings", "columns")
-            self.__cards = settings.get_setting("grid_settings", "cards")
-            self.__shape = settings.get_setting("grid_settings", "shape")
-            self.__grid = RandomGrid().generate_random_grid(self.__rows, self.__columns, self.__cards, self.__shape)
-            self.__grid_copy = deepcopy(self.__grid)

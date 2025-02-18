@@ -20,23 +20,42 @@ class GUI(Tk):
         super().__init__()
         self.title("Mahjong")
         self.__mahjong = mahjong
-        self.show_game()
         self.config(bg='#557788')
 
-    def show_game(self):
-        mouse_controller = MouseController(self.__mahjong)
-        self.bind('<Button-1>', mouse_controller.mouse_clicked)
+        self.__grid_view = GridView(self, self.__mahjong)
+        self.__grid_view.grid(row=1, column=0, columnspan=10)
+        self.__end_view = Canvas(self, width=650, height=800, bg='#557788', highlightthickness=2, highlightbackground="black")
+        self.__end_view.grid_forget()
 
-        grid_view = GridView(self, self.__mahjong)
-        grid_view.grid(row=1, column=0, columnspan=10)
+        mouse_controller = MouseController(self, self.__mahjong, self.__grid_view)
+        self.bind('<Button-1>', mouse_controller.mouse_clicked)
 
         menu = Frame(self)
         menu.config(bg="#557788")
         menu.grid(row=0, column=0)
         SaveMenuController(menu, self.__mahjong).grid(row=0, column=0)
-        OptionsMenuController(menu, self.__mahjong).grid(row=0, column=1)
-        HelpMenuController(menu, self.__mahjong, grid_view).grid(row=0, column=2)
+        OptionsMenuController(self, menu, self.__mahjong).grid(row=0, column=1)
+        HelpMenuController(menu, self.__mahjong, self.__grid_view).grid(row=0, column=2)
         StatisticView(menu, self.__mahjong).grid(row=0, column=3, padx=30)
 
-    def show_end(self):
-        pass
+    def show(self, state:int):
+        """
+        Notes:
+            0 - affiche la grille.
+            1 - affiche la fin gagnante.
+            2 - affiche la fin perdante.
+        """
+        if state == 0:
+            self.__end_view.grid_forget()
+            self.__grid_view.grid(row=1, column=0, columnspan=10)
+        elif state == 1:
+            self.__grid_view.grid_forget()
+            self.__end_view.grid(row=1, column=0, columnspan=10)
+            self.__end_view.delete(ALL)
+            self.__end_view.create_text(325, 400, text="Bravo, vous avez gagné !", font=("Arial", 20), fill="darkorange")
+        elif state == 2:
+            self.__grid_view.grid_forget()
+            self.__end_view.grid(row=1, column=0, columnspan=10)
+            self.__end_view.delete(ALL)
+            self.__end_view.create_text(325, 400, text="Dommage, vous avez perdu !", font=("Arial", 20), fill="darkorange")
+            

@@ -16,7 +16,7 @@ from utils import ModelObserver
 class GridView(Canvas, ModelObserver):
 
     def __init__(self, tk:Tk, mahjong:Mahjong):
-        super().__init__(tk, width=700, height=800, bg="light grey", highlightthickness=2, highlightbackground="black")
+        super().__init__(tk, width=650, height=800, bg="light grey", highlightthickness=2, highlightbackground="black")
         self.__tk = tk
         self.__mahjong = mahjong
         self.__mahjong.add_observer(self)

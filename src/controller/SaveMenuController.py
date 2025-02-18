@@ -3,12 +3,14 @@
 ###########################################
 #                libraries                #
 ###########################################
+import pickle
 from tkinter import *
 ###########################################
 
 ###########################################
 #                modules                  #
 ###########################################
+from model.shape import *
 from model.Mahjong import Mahjong
 from view.GridView import GridView
 ###########################################
@@ -27,7 +29,34 @@ class SaveMenuController(Menubutton):
         self.configure(menu=menu)
 
     def save(self) -> None:
-        pass
+        try:
+            backup = {
+                "grid": self.__mahjong.get_grid(),
+                "copy_grid": self.__mahjong.get_grid_copy(),
+                "rows": self.__mahjong.get_rows(), 
+                "columns": self.__mahjong.get_columns(),
+                "cards": self.__mahjong.get_cards(),
+                "move_history": self.__mahjong.get_move_history(),
+                "shape": self.__mahjong.get_shape()
+                }
+            file = open("./save/save", "wb")
+            pickle.dump(backup, file)
+            file.close()
+        except Exception as e:
+            raise Exception(f"An unexpected error has occurred: {e}")
 
     def open_save(self) -> None:
-        pass
+        try:
+            file = open("./save/save", "rb")
+            save = pickle.load(file)
+            file.close()
+            self.__mahjong.set_grid(save["grid"])
+            self.__mahjong.set_grid_copy(save["copy_grid"])
+            self.__mahjong.set_rows(save["rows"])
+            self.__mahjong.set_columns(save["columns"])
+            self.__mahjong.set_cards(save["cards"])
+            self.__mahjong.set_move_history(save["move_history"])
+            self.__mahjong.set_shape(save["shape"])
+        except:
+            raise Exception("Something went wrong when opening the file")
+
