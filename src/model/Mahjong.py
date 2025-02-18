@@ -38,6 +38,7 @@ class Mahjong(ObservableModel):
         self.__x0, self.__y0 = 55, 40
         self.__click1, self.__click2 = (), ()
         self.__remaining_cards = cards*4
+        self.__shots = 0
 
     def get_rows(self) -> int:
         return self.__rows
@@ -81,6 +82,9 @@ class Mahjong(ObservableModel):
     def get_remaining_cards(self) -> int:
         return self.__remaining_cards
 
+    def get_shots(self) -> int:
+        return self.__shots
+
     def set_grid(self, grid:[[[int]]]) -> None:
         self.__grid = grid
         self._fire_change()
@@ -123,6 +127,7 @@ class Mahjong(ObservableModel):
         self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
         self.__remaining_cards = self.__cards*4
+        self.__shots = 0
         self._fire_change()
 
     def retry(self) -> None:
@@ -130,6 +135,7 @@ class Mahjong(ObservableModel):
         self.__grid = deepcopy(self.__grid_copy)
         self.__move_history = []
         self.__remaining_cards = self.__cards*4
+        self.__shots = 0
         self._fire_change()
 
     def remove(self) -> None:
@@ -138,7 +144,8 @@ class Mahjong(ObservableModel):
             self.__move_history.append((self.__grid[self.__click1[0]][self.__click1[1]][0], (self.__click1), (self.__click2)))
             self.__grid[self.__click1[0]][self.__click1[1]].pop(0)
             self.__grid[self.__click2[0]][self.__click2[1]].pop(0)
-            self.__remaining_cards = self.__remaining_cards-2
+            self.__remaining_cards -= 2
+            self.__shots += 1
             self._fire_change()
 
     def add(self) -> None:
@@ -152,7 +159,8 @@ class Mahjong(ObservableModel):
             move = self.__move_history.pop()
             self.__grid[move[1][0]][move[1][1]].insert(0, move[0])
             self.__grid[move[2][0]][move[2][1]].insert(0, move[0])
-            self.__remaining_cards = self.__remaining_cards+2
+            self.__remaining_cards += 2
+            self.__shots -= 1
             self._fire_change()
     
     def is_empty(self) -> bool:
