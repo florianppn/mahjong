@@ -208,4 +208,8 @@ class Mahjong(ObservableModel):
         Returns:
             Une liste contenant deux tuples. Les tuples contiennent les coordonnées et le numéro des cartes identiques.
         """
-        return choice(self.playable_card_couple())
+        couples_cards = self.playable_card_couple()
+        if (len(couples_cards) > 0):
+            return choice(self.playable_card_couple())
+        else:
+            return None
