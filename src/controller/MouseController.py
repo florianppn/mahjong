@@ -45,8 +45,6 @@ class MouseController:
             self.__mahjong.remove()
             self.check_game_status()
             self.__mahjong.set_click1(()), self.__mahjong.set_click2(())
-        elif click1 == click2:
-            self.__mahjong.set_click1(()), self.__mahjong.set_click2(())
         else:
             self.__mahjong.set_click1(()), self.__mahjong.set_click2(())
             

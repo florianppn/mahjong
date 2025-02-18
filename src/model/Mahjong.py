@@ -134,7 +134,7 @@ class Mahjong(ObservableModel):
 
     def remove(self) -> None:
         """Supprimer un couple de cartes de la grille."""
-        if self.__grid[self.__click1[0]][self.__click1[1]][0] == self.__grid[self.__click2[0]][self.__click2[1]][0]:
+        if self.__grid[self.__click1[0]][self.__click1[1]][0] == self.__grid[self.__click2[0]][self.__click2[1]][0] and self.__click1 != self.__click2:
             self.__move_history.append((self.__grid[self.__click1[0]][self.__click1[1]][0], (self.__click1), (self.__click2)))
             self.__grid[self.__click1[0]][self.__click1[1]].pop(0)
             self.__grid[self.__click2[0]][self.__click2[1]].pop(0)
