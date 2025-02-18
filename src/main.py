@@ -16,6 +16,6 @@ from model import Mahjong
 
 if __name__ == "__main__":
 
-    mahjong = Mahjong(4, 4, 8, ClassicShape())
+    mahjong = Mahjong(8, 8, 32, ClassicShape())
     gui = GUI(mahjong)
     gui.mainloop()
