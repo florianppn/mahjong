@@ -15,23 +15,15 @@ Le but est d'éliminer toutes les cartes de la grille en les associant par paire
 
 + Possibilité de sauvegarder votre partie en cours et de la reprendre ultérieurement.
 
-## Modules
-
-+ Tkinter pour l'interface graphique.
-
-+ Pickle pour le chiffrage de la sauvegarde.
-
-+ Copy pour créer une copie profonde de la grille de jeu.
-
 ## Comment lancer le jeu
 
-+ Vous devez éxécuter le fichier `src/main.py`.
+Pour lancer le jeu vous aller devoir éxécuter le fichier `src/main.py`.
 
-    + Via la commande : `python3 main.py` (Linux).
+Si vous êtes sous LINUX installez [python3](https://docs.python.org/fr/3.13/using/unix.html). Ensuite lancez la commande : `python3 main.py` ou créez un [environnement python3](https://docs.python.org/3/library/venv.html).
 
-    + Via la commande : `./main.py` (Windows).
+Si vous êtes sous WINDOWS installez [python3](https://www.python.org/downloads/windows/). Ensuite lancez la commande `python main.py` ou créez un [environnement python3](https://docs.python.org/3/library/venv.html).
 
-    + Via votre IDE (Codium, etc...).
+Vous pouvez également lancer le jeu via un IDE (Codium, PyCharm, Tonny, etc...), pour cela référez-vous à la documentation de celui-ci.
 
 ## Contribuer
 
@@ -51,6 +43,6 @@ Ce projet est sous licence [MIT].
 
 ## Crédits des images
 
-Images de source inconnue. Les images m'ont été fournis en 1re année de licence informatique à Caen (2021).
+Icones conçu par [www.freepik.com](https://fr.freepik.com/).
 
 

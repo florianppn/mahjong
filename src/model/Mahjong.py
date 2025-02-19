@@ -34,7 +34,7 @@ class Mahjong(ObservableModel):
         self.__grid = shape.generate_grid(rows, columns, cards)
         self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
-        self.__cx, self.__cy = 64, 84
+        self.__cx, self.__cy = 50, 62
         self.__x0, self.__y0 = 55, 40
         self.__click1, self.__click2 = (), ()
         self.__remaining_cards = cards*4
