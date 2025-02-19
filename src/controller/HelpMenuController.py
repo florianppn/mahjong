@@ -37,8 +37,7 @@ class HelpMenuController(Menubutton):
     def show_card_couple(self) -> None:
         move = self.__mahjong.one_move()
         if (move != None):
-            self.__grid_view.show_card(move[0][0], move[0][1])
-            self.__grid_view.show_card(move[1][0], move[1][1])
+            self.__grid_view.show_couple(move[0][0], move[0][1], move[1][0], move[1][1])
 
     def back(self) -> None:
         self.__mahjong.add()
