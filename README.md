@@ -51,6 +51,6 @@ Ce projet est sous licence [MIT].
 
 ## Crédits des images
 
-
+Images de source inconnue. Les images m'ont été fournis en 1ère année de licence informatique à Caen (2021).
 
 

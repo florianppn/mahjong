@@ -33,9 +33,11 @@ class GUI(Tk):
         menu = Frame(self)
         menu.config(bg="#557788")
         menu.grid(row=0, column=0)
-        SaveMenuController(menu, self.__mahjong).grid(row=0, column=0)
+        self.__save_menu = SaveMenuController(menu, self.__mahjong)
+        self.__save_menu.grid(row=0, column=0)
         OptionsMenuController(self, menu, self.__mahjong).grid(row=0, column=1)
-        HelpMenuController(menu, self.__mahjong, self.__grid_view).grid(row=0, column=2)
+        self.__help_menu = HelpMenuController(menu, self.__mahjong, self.__grid_view)
+        self.__help_menu.grid(row=0, column=2)
         StatisticView(menu, self.__mahjong).grid(row=0, column=3, padx=40)
 
     def show(self, state:int):
@@ -46,14 +48,20 @@ class GUI(Tk):
             2 - affiche la fin perdante.
         """
         if state == 0:
+            self.__save_menu.config(state="normal")
+            self.__help_menu.config(state="normal")
             self.__end_view.grid_forget()
             self.__grid_view.grid(row=1, column=0, columnspan=10)
         elif state == 1:
+            self.__save_menu.config(state="disabled")
+            self.__help_menu.config(state="disabled")
             self.__grid_view.grid_forget()
             self.__end_view.grid(row=1, column=0, columnspan=10)
             self.__end_view.delete(ALL)
             self.__end_view.create_text(325, 400, text="Bravo, vous avez gagné !", font=("Arial", 20), fill="darkorange")
         elif state == 2:
+            self.__save_menu.config(state="disabled")
+            self.__help_menu.config(state="disabled")
             self.__grid_view.grid_forget()
             self.__end_view.grid(row=1, column=0, columnspan=10)
             self.__end_view.delete(ALL)

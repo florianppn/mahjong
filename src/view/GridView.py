@@ -20,7 +20,7 @@ class GridView(Canvas, ModelObserver):
         self.__tk = tk
         self.__mahjong = mahjong
         self.__mahjong.add_observer(self)
-        self.__cards = [PhotoImage(file = f"./resources/assets/c{str(i)}.gif") for i in range(1, 35)]
+        self.__cards = [PhotoImage(file = f"./resources/assets/c{str(i)}.gif") for i in range(34)]
         self._paint_component()
 
     def _paint_component(self):
@@ -42,7 +42,7 @@ class GridView(Canvas, ModelObserver):
                     else:
                         color = "orange"
                     self.create_rectangle(x0+cx*j+5, y0+cy*i+5, x0+cx*j+cx-5, y0+cy*i+cy-5, outline = color, width = 3) 
-                    self.create_image(x0+cx*j+cx/2+1, y0+cy*i+cy/2, image = self.__cards[grid[i][j][0]-1])
+                    self.create_image(x0+cx*j+cx/2+1, y0+cy*i+cy/2, image = self.__cards[grid[i][j][0]])
         if(click1 != () and len(grid[click1[0]][click1[1]]) != 0):
             i, j = click1
             self.create_rectangle(x0+cx*j+5, y0+cy*i+5, x0+cx*j+cx-5, y0+cy*i+cy-5, outline = "black", width = 3)
