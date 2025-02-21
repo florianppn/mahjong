@@ -33,7 +33,7 @@ Vous pouvez également lancer le jeu via un IDE (Codium, PyCharm, Tonny, etc...)
 
 ## Licence
 
-Ce projet est sous licence [MIT].
+Ce projet est sous licence [MIT](./LICENSE.md).
 
 ## Captures d'écran
 
