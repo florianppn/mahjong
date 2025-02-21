@@ -14,6 +14,7 @@ from utils import ModelObserver
 ###########################################
 
 class GridView(Canvas, ModelObserver):
+    """Représente la vue de la grille de jeu."""
 
     def __init__(self, tk:Tk, mahjong:Mahjong):
         super().__init__(tk, width=650, height=800, bg="light grey", highlightthickness=2, highlightbackground="black")
@@ -43,6 +44,7 @@ class GridView(Canvas, ModelObserver):
                     self.create_image(x0+cx*j+cx/2+1, y0+cy*i+cy/2, image = self.__cards[grid[i][j][0]-1])
 
     def show_card(self, i:int, j:int) -> None:
+        """Montre une carte."""
         self.delete(ALL)
         x0, y0 = self.__mahjong.get_x0(), self.__mahjong.get_y0()
         cx, cy = self.__mahjong.get_cx(), self.__mahjong.get_cy()
@@ -50,6 +52,7 @@ class GridView(Canvas, ModelObserver):
         self._paint_component()
 
     def show_couple(self, i:int, j:int, k:int, m:int) -> None:
+        """Montre un couple de carte."""
         self.delete(ALL)
         x0, y0 = self.__mahjong.get_x0(), self.__mahjong.get_y0()
         cx, cy = self.__mahjong.get_cx(), self.__mahjong.get_cy()

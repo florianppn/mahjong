@@ -15,6 +15,7 @@ from controller import *
 ###########################################
 
 class GUI(Tk):
+    """Représente l'interface graphique de l'utilisateur."""
 
     def __init__(self, mahjong:Mahjong):
         super().__init__()
@@ -41,7 +42,7 @@ class GUI(Tk):
         StatisticView(menu, self.__mahjong).grid(row=0, column=3, padx=40)
 
     def show(self, state:int):
-        """
+        """Montrer la grille de jeu.
         Notes:
             0 - affiche la grille.
             1 - affiche la fin gagnante.

@@ -7,6 +7,7 @@ from abc import ABC, abstractmethod
 ###########################################
 
 class ShapeStrategy(ABC):
+    """Représente une forme de grille."""
 
     @abstractmethod
     def generate_grid(self, rows:int, columns:int, cards:int):

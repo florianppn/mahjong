@@ -15,6 +15,7 @@ from view.GridView import GridView
 ###########################################
 
 class OptionsMenuController(Menubutton):
+    """Représente le menu des options."""
 
     def __init__(self, gui, menu:Menu, mahjong:Mahjong):
         super().__init__(menu, text="Options", width=20, borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
@@ -36,6 +37,7 @@ class OptionsMenuController(Menubutton):
         menu_shape.add_command(label="Croix", command=lambda:self.set_shape(CrossShape()))
 
     def set_shape(self, shape:ShapeStrategy) -> None:
+        """Modifie la forme de la grille"""
         self.__mahjong.set_shape(shape)
         self.__mahjong.replay()
         self.__gui.show(0)

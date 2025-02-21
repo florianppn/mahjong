@@ -21,10 +21,7 @@ class Mahjong(ObservableModel):
         rows: Nombre de lignes de la grille.
         columns: Nombre de colonnes de la grille.
         cards: Nombre de cartes à placer dans la grille.
-        shape: Forme de la grille.
-        grid: grille généré aléatoirement.
-        grid_copy: copie de la grille généré aléatoirement.
-        move_history: Historique des coups joué par le joueur => (carte, (coordonnée de la première carte), (coordonnée de la deuxième carte)).
+        shape: stratégie pour la forme de la grille de jeu.
     """
     def __init__(self, rows:int, columns:int, cards:int, shape:ShapeStrategy):
         super().__init__()

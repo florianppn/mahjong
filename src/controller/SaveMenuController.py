@@ -16,6 +16,7 @@ from view.GridView import GridView
 ###########################################
 
 class SaveMenuController(Menubutton):
+    """Représente le menu de sauvegarde d'une partie."""
 
     def __init__(self, tk:Tk, mahjong:Mahjong):
         super().__init__(tk, text="Fichier", width=20, borderwidth=2, relief=RAISED, bg='gray', activebackground='darkorange', cursor="hand2")
@@ -29,6 +30,7 @@ class SaveMenuController(Menubutton):
         self.configure(menu=menu)
 
     def save(self) -> None:
+        """Sauvegarde d'une partie"""
         try:
             backup = {
                 "grid": self.__mahjong.get_grid(),
@@ -46,6 +48,7 @@ class SaveMenuController(Menubutton):
             raise Exception(f"An unexpected error has occurred: {e}")
 
     def open_save(self) -> None:
+        """Chargement d'une partie sauvegardée"""
         try:
             file = open("./save/save", "rb")
             save = pickle.load(file)

@@ -14,6 +14,7 @@ from utils import ModelObserver
 ###########################################
 
 class StatisticView(Label, ModelObserver):
+    """Représente la vue des statistiques de jeu."""
 
     def __init__(self, frame:Frame, mahjong:Mahjong):
         super().__init__(frame, text="Cartes : "+str(mahjong.get_remaining_cards()) + " | Mouvements : "+str(mahjong.get_shots()), bg='#557788')
