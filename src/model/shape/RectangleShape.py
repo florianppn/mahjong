@@ -15,12 +15,9 @@ from model.shape.ShapeStrategy import ShapeStrategy
 class RectangleShape(ShapeStrategy):
 
     def generate_grid(self, rows:int, columns:int, cards:int):
-        """Génère une grille de jeu aléatoire en forme de rectangle.
-        Args:
-            rows: Nombre de lignes de la grille.
-            columns: Nombre de colonnes de la grille.
-            cards: Nombre de cartes à placer dans la grille.
-        """
+        if rows < 2 or columns < 2 or cards < 2:
+            raise ValueError("Lignes, colonnes et cartes doivent être supérieur à 2.")
+
         couples = [(i, i) for i in range(cards) for _ in range(4)]
         shuffle(couples)
         grid = [[[] for _ in range(columns)] for _ in range(rows)]
@@ -32,6 +29,9 @@ class RectangleShape(ShapeStrategy):
             ]
 
         shuffle(positions)
+
+        if len(couples)*2 <= len(positions):
+            raise ValueError("Pas assez de cartes !")
 
         for i in range(len(positions)//2):
             couple = couples.pop()

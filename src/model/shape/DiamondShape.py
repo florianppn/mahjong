@@ -15,7 +15,6 @@ from model.shape.ShapeStrategy import ShapeStrategy
 class DiamondShape(ShapeStrategy):
 
     def generate_grid(self, rows: int, columns: int, cards: int):
-        """Génère une grille de jeu aléatoire en forme de losange."""
         if rows < 2 or columns < 2 or cards < 2:
             raise ValueError("Lignes, colonnes et cartes doivent être supérieur à 2.")
 
@@ -37,11 +36,12 @@ class DiamondShape(ShapeStrategy):
             ]
         shuffle(positions_bottom)
 
-        if cards*2 > len(positions_top)+len(positions_bottom):
-            raise ValueError("Trop de cartes pour la taille du losange.")
-
         couples = [(i, i) for i in range(cards) for _ in range(3)]
         shuffle(couples)
+
+        if len(couples)*2 <= len(positions_top)+len(positions_bottom):
+            raise ValueError("Pas assez de cartes !")
+
         grid = [[[] for _ in range(columns)] for _ in range(rows)]
         for _ in range(len(positions_top)//2+len(positions_bottom)//2):
             couple = couples.pop()

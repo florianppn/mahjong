@@ -15,15 +15,9 @@ from model.shape.ShapeStrategy import ShapeStrategy
 class ClassicShape(ShapeStrategy):
 
     def generate_grid(self, rows:int, columns:int, cards:int):
-        """Génère une grille de jeu aléatoire.
-        Args:
-            rows: Nombre de lignes de la grille.
-            columns: Nombre de colonnes de la grille.
-            cards: Nombre de cartes à placer dans la grille.
+        if rows < 2 or columns < 2 or cards < 2:
+            raise ValueError("Lignes, colonnes et cartes doivent être supérieur à 2.")
 
-        Returns:
-            Une liste de listes qui contiennent des listes d'entiers représentant la grille générée aléatoirement. Chaque élément de la liste interne correspond à une carte.
-        """
         couples = [(i, i) for i in range(cards) for _ in range(6)]
         grid = [[[] for _ in range(columns)] for _ in range(rows)]
         positions = [
@@ -35,6 +29,9 @@ class ClassicShape(ShapeStrategy):
         shuffle(positions)
         shuffle(couples)
         
+        if len(couples)*2 <= len(positions):
+            raise ValueError("Pas assez de cartes !")
+
         for i in range(len(positions)//2):
             couple = couples.pop()
             pos1, pos2 = positions.pop(), positions.pop()
