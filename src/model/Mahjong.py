@@ -37,7 +37,7 @@ class Mahjong(ObservableModel):
         self.__cx, self.__cy = 50, 62
         self.__x0, self.__y0 = 130, 90
         self.__click1, self.__click2 = (), ()
-        self.__remaining_cards = cards*4
+        self.__remaining_cards = sum(len(cell) for row in self.__grid for cell in row)
         self.__shots = 0
 
     def get_rows(self) -> int:
@@ -126,7 +126,7 @@ class Mahjong(ObservableModel):
         self.__grid = self.__shape.generate_grid(self.__rows, self.__columns, self.__cards)
         self.__grid_copy = deepcopy(self.__grid)
         self.__move_history = []
-        self.__remaining_cards = self.__cards*4
+        self.__remaining_cards = sum(len(cell) for row in self.__grid for cell in row)
         self.__shots = 0
         self._fire_change()
 
@@ -134,7 +134,7 @@ class Mahjong(ObservableModel):
         """Rejouer la partie."""
         self.__grid = deepcopy(self.__grid_copy)
         self.__move_history = []
-        self.__remaining_cards = self.__cards*4
+        self.__remaining_cards = sum(len(cell) for row in self.__grid for cell in row)
         self.__shots = 0
         self._fire_change()
 
