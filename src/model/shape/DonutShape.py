@@ -23,46 +23,21 @@ class DonutShape(ShapeStrategy):
 
         Returns:
             Une liste de listes qui contiennent des listes d'entiers représentant la grille générée aléatoirement. Chaque élément de la liste interne correspond à une carte.
-
-        Note: 
-            L'algorithme utilisé ici place aléatoirement les cartes dans la grille, en évitant de placer plusieurs fois la même carte dans une même cellule. 
-            Cependant, il ne garantit pas une distribution parfaitement uniforme des cartes. Cet algorythme n'est pas optimisé non plus.
         """
-        cards_dict = {}
-        grid = []
-        for card in range(cards):
-            cards_dict[card] = 0
-        for row in range(rows):
-            grid += [[]]
-            for column in range(columns):
-                grid[row] += [[]]
-        while list(cards_dict.values()) != [4]*(cards):
-            for row in range(len(grid)):
-                for column in range(len(grid[row])):
-                    if row == 0 or row == len(grid)-1:
-                        card = choice(list(cards_dict.keys()))
-                        if cards_dict[card] != 4:
-                            if len(grid[row][column]) == len(set(grid[row][column])):
-                                cards_dict[card] += 1
-                                grid[row][column].append(card)
-                    elif column == 0 or column == len(grid[row])-1:
-                        card = choice(list(cards_dict.keys()))
-                        if cards_dict[card] != 4:
-                            if len(grid[row][column]) == len(set(grid[row][column])):
-                                cards_dict[card] += 1
-                                grid[row][column].append(card)
-                    elif row == 1 or row == len(grid)-2:
-                        if column > 0 and column < len(grid)-1:
-                            card = choice(list(cards_dict.keys()))
-                            if cards_dict[card] != 4:
-                                if len(grid[row][column]) == len(set(grid[row][column])):
-                                    cards_dict[card] += 1
-                                    grid[row][column].append(card)
-                    elif column == 1 or column == len(grid[row])-2:
-                        if row > 0 and row < len(grid[row])-1:
-                            card = choice(list(cards_dict.keys()))
-                            if cards_dict[card] != 4:
-                                if len(grid[row][column]) == len(set(grid[row][column])):
-                                    cards_dict[card] += 1
-                                    grid[row][column].append(card)     
+        couples = [(i, i) for i in range(cards) for _ in range(4)]
+        shuffle(couples)
+        grid = [[[] for _ in range(columns)] for _ in range(rows)]
+        positions = [
+            (i, j) for i in range(rows)
+            for j in range(columns)
+            for _ in range(4) #profondeur max.
+            if (i == 0 or i == 1 or i == rows-1 or i == rows-2) or (j == 0 or j == 1 or j == columns-1 or j == columns-2)
+            ]
+        shuffle(positions)
+        for i in range(len(positions)//2):
+            couple = couples.pop()
+            pos1, pos2 = positions.pop(), positions.pop()
+            grid[pos1[0]][pos1[1]].append(couple[0])
+            grid[pos2[0]][pos2[1]].append(couple[1])
         return grid
+        

@@ -28,7 +28,7 @@ class OptionsMenuController(Menubutton):
         menu_options.add_command(label="Nouvelle partie", command=lambda:(self.__mahjong.replay(), self.__gui.show(0)))
         menu_options.add_command(label="Réessayer", command=lambda:(self.__mahjong.retry(), self.__gui.show(0)))
         menu_options.add_cascade(label="Forme de la grille", menu=menu_shape)
-        menu_shape.add_command(label="Classique", command=lambda:self.set_shape(ClassicShape()))
+        menu_shape.add_command(label="Classic", command=lambda:self.set_shape(ClassicShape()))
         menu_shape.add_command(label="Rectangle", command=lambda:self.set_shape(RectangleShape()))
         menu_shape.add_command(label="Donut", command=lambda:self.set_shape(DonutShape()))
         menu_shape.add_command(label="Double", command=lambda:self.set_shape(DoubleShape()))

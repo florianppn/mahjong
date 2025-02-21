@@ -20,31 +20,23 @@ class RectangleShape(ShapeStrategy):
             rows: Nombre de lignes de la grille.
             columns: Nombre de colonnes de la grille.
             cards: Nombre de cartes à placer dans la grille.
-
-        Returns:
-            Une liste de listes qui contiennent des listes d'entiers représentant la grille générée aléatoirement. Chaque élément de la liste interne correspond à une carte.
         """
-        cards_dict = {}
-        grid = []
-        for card in range(cards):
-            cards_dict[card] = 0
-        for row in range(rows):
-            grid += [[]]
-            for column in range(columns):
-                grid[row] += [[]]
-        while list(cards_dict.values()) != [4]*(cards):
-            for row in range(len(grid)):
-                for column in range(len(grid[row])):
-                    if row == 0 or row == len(grid)-1:
-                        card = choice(list(cards_dict.keys()))
-                        if cards_dict[card] != 4:
-                            if len(grid[row][column]) == len(set(grid[row][column])):
-                                cards_dict[card] += 1
-                                grid[row][column].append(card)
-                    elif column == 0 or column == len(grid[row])-1:
-                        card = choice(list(cards_dict.keys()))
-                        if cards_dict[card] != 4:
-                            if len(grid[row][column]) == len(set(grid[row][column])):
-                                cards_dict[card] += 1
-                                grid[row][column].append(card)
+        couples = [(i, i) for i in range(cards) for _ in range(4)]
+        shuffle(couples)
+        grid = [[[] for _ in range(columns)] for _ in range(rows)]
+        positions = [
+            (i, j) for i in range(rows)
+            for j in range(columns)
+            for _ in range(4) #profondeur max.
+            if (i == 0 or i == rows-1) or (j == 0 or j == columns-1)
+            ]
+
+        shuffle(positions)
+
+        for i in range(len(positions)//2):
+            couple = couples.pop()
+            pos1, pos2 = positions.pop(), positions.pop()
+            grid[pos1[0]][pos1[1]].append(couple[0])
+            grid[pos2[0]][pos2[1]].append(couple[1])
+
         return grid

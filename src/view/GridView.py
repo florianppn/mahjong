@@ -20,7 +20,7 @@ class GridView(Canvas, ModelObserver):
         self.__tk = tk
         self.__mahjong = mahjong
         self.__mahjong.add_observer(self)
-        self.__cards = [PhotoImage(file = f"./resources/assets/c{str(i)}.png") for i in range(mahjong.get_cards())]
+        self.__cards = [PhotoImage(file = f"./resources/assets/c{str(i)}.png") for i in range(1, mahjong.get_cards()+1)]
         self._paint_component()
 
     def _paint_component(self):
@@ -40,7 +40,7 @@ class GridView(Canvas, ModelObserver):
         for i in range(rows):  
             for j in range(columns):
                 if grid[i][j] != []:
-                    self.create_image(x0+cx*j+cx/2+1, y0+cy*i+cy/2, image = self.__cards[grid[i][j][0]])
+                    self.create_image(x0+cx*j+cx/2+1, y0+cy*i+cy/2, image = self.__cards[grid[i][j][0]-1])
 
     def show_card(self, i:int, j:int) -> None:
         self.delete(ALL)

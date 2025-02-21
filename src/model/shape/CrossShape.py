@@ -23,33 +23,22 @@ class CrossShape(ShapeStrategy):
 
         Returns:
             Une liste de listes qui contiennent des listes d'entiers représentant la grille générée aléatoirement. Chaque élément de la liste interne correspond à une carte.
-
-        Note: 
-            L'algorithme utilisé ici place aléatoirement les cartes dans la grille, en évitant de placer plusieurs fois la même carte dans une même cellule. 
-            Cependant, il ne garantit pas une distribution parfaitement uniforme des cartes. Cet algorythme n'est pas optimisé non plus.
         """
-        cards_dict = {}
-        grid = []
-        for card in range(cards):
-            cards_dict[card] = 0
-        for row in range(rows):
-            grid += [[]]
-            for column in range(columns):
-                grid[row] += [[]]
-        while list(cards_dict.values()) != [4]*(cards):
-            for row in range(len(grid)):
-                for column in range(len(grid[row])):
-                    if row < len(grid)-5 or row > len(grid)-4:
-                        if column == len(grid[row])-5 or column == len(grid[row])-4:
-                            card = choice(list(cards_dict.keys()))
-                            if cards_dict[card] != 4:
-                                if len(grid[row][column]) == len(set(grid[row][column])):
-                                    cards_dict[card] += 1
-                                    grid[row][column].append(card)
-                    elif row == len(grid)-5 or row == len(grid)-4:
-                        card = choice(list(cards_dict.keys()))
-                        if cards_dict[card] != 4:
-                            if len(grid[row][column]) == len(set(grid[row][column])):
-                                cards_dict[card] += 1
-                                grid[row][column].append(card)
+        middle_row = rows//2
+        middle_column = columns//2
+        grid = [[[] for _ in range(columns)] for _ in range(rows)]
+        couples = [(i, i) for i in range(cards) for _ in range(3)]
+        positions = [
+            (i, j) for i in range(rows) 
+            for j in range(columns) 
+            for _ in range(4) #profondeur max.
+            if (i == middle_row or i == middle_row-1) or (j == middle_column or j == middle_column-1)
+            ]
+        shuffle(couples)
+        shuffle(positions)
+        for i in range(len(positions)//2):
+            couple = couples.pop()
+            pos1, pos2 = positions.pop(), positions.pop()
+            grid[pos1[0]][pos1[1]].append(couple[0])
+            grid[pos2[0]][pos2[1]].append(couple[1])
         return grid

@@ -24,15 +24,21 @@ class ClassicShape(ShapeStrategy):
         Returns:
             Une liste de listes qui contiennent des listes d'entiers représentant la grille générée aléatoirement. Chaque élément de la liste interne correspond à une carte.
         """
-        depth = 4
-        cards = [i for i in range(cards) for _ in range(depth)]
-        grid = [[[] for _ in range(rows)] for _ in range(columns)]
-        positions = [(i, j) for i in range(rows) for j in range(columns)]
+        couples = [(i, i) for i in range(cards) for _ in range(6)]
+        grid = [[[] for _ in range(columns)] for _ in range(rows)]
+        positions = [
+            (i, j) for i in range(rows)
+            for j in range(columns)
+            for _ in range(4) #profondeur max.
+            ]
+
         shuffle(positions)
-        shuffle(cards)
-        for i in range(len(cards)):
-            pos = positions[0]
-            if len(grid[pos[0]][pos[1]]) >= (depth-1):
-                positions.pop(0)
-            grid[pos[0]][pos[1]].append(cards.pop())
+        shuffle(couples)
+        
+        for i in range(len(positions)//2):
+            couple = couples.pop()
+            pos1, pos2 = positions.pop(), positions.pop()
+            grid[pos1[0]][pos1[1]].append(couple[0])
+            grid[pos2[0]][pos2[1]].append(couple[1])
+
         return grid
